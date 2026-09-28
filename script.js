@@ -143,15 +143,19 @@ function updateStatusFilter() {
 // タイプ
 // =====================================================
 
+
 function updateTypeFilter() {
 
-    const types =
-        [...new Set(
-            cards.map(card => card.type)
-        )];
+    const types = [
+        "キュート",
+        "クール",
+        "セクシー",
+        "ポップ"
+    ].filter(type =>
+        cards.some(card => card.type === type)
+    );
 
     createFilterButtons(
-
         "type-filter",
 
         [
@@ -177,11 +181,8 @@ function updateTypeFilter() {
             displayCards();
 
         }
-
     );
-
 }
-
 
 // =====================================================
 // カテゴリ
@@ -189,13 +190,20 @@ function updateTypeFilter() {
 
 function updateCategoryFilter() {
 
-    const categories =
-        [...new Set(
-            cards.map(card => card.category)
-        )];
+    const categoryOrder = [
+        "トップス",
+        "ボトムス",
+        "シューズ",
+        "トップス&ボトムス",
+        "フルコーデ",
+        "アクセサリー"
+    ];
+
+    const categories = categoryOrder.filter(category =>
+        cards.some(card => card.category === category)
+    );
 
     createFilterButtons(
-
         "category-filter",
 
         [
@@ -221,9 +229,7 @@ function updateCategoryFilter() {
             displayCards();
 
         }
-
     );
-
 }
 
 
@@ -233,13 +239,20 @@ function updateCategoryFilter() {
 
 function updateBrandFilter() {
 
-    const brands =
-        [...new Set(
-            cards.map(card => card.brand)
-        )];
+    const brandOrder = [
+        "Angely Sugar",
+        "FUTURING GIRL",
+        "SPICY AGEHA",
+        "Dreamy Crown",
+        "Maple Ribbon",
+        ""
+    ];
+
+    const brands = brandOrder.filter(brand =>
+        cards.some(card => card.brand === brand)
+    );
 
     createFilterButtons(
-
         "brand-filter",
 
         [
@@ -265,9 +278,7 @@ function updateBrandFilter() {
             displayCards();
 
         }
-
     );
-
 }
 
 
@@ -277,13 +288,18 @@ function updateBrandFilter() {
 
 function updateRarityFilter() {
 
-    const rarities =
-        [...new Set(
-            cards.map(card => card.rarity)
-        )];
+    const rarityOrder = [
+        "PR",
+        "ER",
+        "R",
+        "N"
+    ];
+
+    const rarities = rarityOrder.filter(rarity =>
+        cards.some(card => card.rarity === rarity)
+    );
 
     createFilterButtons(
-
         "rarity-filter",
 
         [
@@ -293,7 +309,7 @@ function updateRarityFilter() {
             },
 
             ...rarities.map(rarity => ({
-                label: rarity,
+                label: rarity === "ER" ? "✨ ER" : rarity,
                 value: rarity
             }))
         ],
@@ -309,9 +325,7 @@ function updateRarityFilter() {
             displayCards();
 
         }
-
     );
-
 }
 
 
