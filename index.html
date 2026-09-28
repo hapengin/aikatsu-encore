@@ -344,16 +344,65 @@ body {
     animation: sparkleCard 2s ease-in-out infinite;
 }
 
-@keyframes sparkleCard {
-    0%,100% {
-        opacity: .35;
-        transform: scale(.8) rotate(0);
-    }
+/* ERのキラキラ */
 
-    50% {
-        opacity: 1;
-        transform: scale(1.2) rotate(15deg);
-    }
+/* ERのキラキラ */
+
+.card.rarity-er {
+    border: 2px solid #e6c45c;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf0,
+            #fff6c9,
+            #f9efff,
+            #eaf7ff
+        );
+
+    box-shadow:
+        0 0 8px rgba(255, 220, 100, 0.65),
+        0 7px 25px rgba(220, 180, 80, 0.28);
+}
+
+.card.rarity-er::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 3px;
+    left: 6px;
+
+    color: #ffd84d;
+
+    font-size: 23px;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ffd84d;
+
+    animation:
+        sparkleCard 1.4s ease-in-out infinite;
+}
+
+.card.rarity-er::after {
+    content: "✧";
+
+    position: absolute;
+
+    top: 30px;
+    right: 6px;
+
+    color: #d9a7ff;
+
+    font-size: 18px;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 9px #d9a7ff;
+
+    animation:
+        sparkleCard 1.8s ease-in-out infinite;
 }
 
 /* --------------------
