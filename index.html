@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>アイカツ！アンコール カードアルバム</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+
+    color: #66566f;
+
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,.9) 0 30px, transparent 31px),
+        radial-gradient(circle at 90% 20%, rgba(255,255,255,.8) 0 20px, transparent 21px),
+        linear-gradient(
+            135deg,
+            #fff4fb 0%,
+            #f8f5ff 35%,
+            #eefaff 70%,
+            #fff9f1 100%
+        );
+
+    min-height: 100vh;
+}
+
+/* --------------------
+   全体
+-------------------- */
+
+.container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 25px 18px 50px;
+}
+
+/* --------------------
+   タイトル
+-------------------- */
+
+.logo-area {
+    text-align: center;
+    margin: 10px 0 22px;
+}
+
+.logo-area img {
+    width: min(430px, 85%);
+    max-height: 120px;
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 5px 8px rgba(150, 110, 170, .18));
+
+    transition: transform .25s;
+}
+
+.logo-area img:hover {
+    transform: scale(1.03);
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #a38da9;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* --------------------
+   キラキラ
+-------------------- */
+
+.sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 20px;
+    opacity: .55;
+    animation: floatSparkle 5s ease-in-out infinite;
+}
+
+.sparkle1 {
+    top: 12%;
+    left: 4%;
+}
+
+.sparkle2 {
+    top: 30%;
+    right: 4%;
+    animation-delay: 1s;
+}
+
+.sparkle3 {
+    bottom: 15%;
+    left: 8%;
+    animation-delay: 2s;
+}
+
+.sparkle4 {
+    bottom: 25%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+@keyframes floatSparkle {
+    0%,100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(15deg);
+    }
+}
+
+/* --------------------
+   所持枚数
+-------------------- */
+
+.collection-count {
+    width: fit-content;
+    margin: 0 auto 20px;
+
+    padding: 10px 22px;
+
+    background: rgba(255,255,255,.8);
+
+    border: 2px solid #f4c9e5;
+    border-radius: 999px;
+
+    box-shadow:
+        0 5px 18px rgba(210,160,210,.18);
+
+    font-weight: bold;
+    color: #8b6d92;
+}
+
+/* --------------------
+   フィルター
+-------------------- */
+
+.filter-area {
+    background: rgba(255,255,255,.78);
+
+    border: 1px solid rgba(255,255,255,.95);
+
+    border-radius: 25px;
+
+    padding: 18px;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(190,160,210,.16);
+}
+
+.filter-group {
+    margin-bottom: 13px;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #a17ba6;
+    margin-bottom: 7px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.filter-btn {
+    border: none;
+
+    padding: 7px 14px;
+
+    border-radius: 999px;
+
+    background: #fff;
+
+    color: #94769a;
+
+    border: 1px solid #ead8ee;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    transition: .2s;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(200,160,210,.2);
+}
+
+.filter-btn.active {
+    color: white;
+
+    border-color: transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff9dce,
+            #bda1ff
+        );
+
+    box-shadow:
+        0 5px 14px rgba(220,150,210,.3);
+}
+
+/* --------------------
+   カードグリッド
+-------------------- */
+
+#card-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(180px, 1fr));
+
+    gap: 20px;
+}
+
+/* --------------------
+   カード
+-------------------- */
+
+.card {
+    position: relative;
+
+    background: rgba(255,255,255,.9);
+
+    border-radius: 22px;
+
+    padding: 10px;
+
+    border: 2px solid #eee0f3;
+
+    box-shadow:
+        0 6px 18px rgba(180,150,200,.14);
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-7px) scale(1.015);
+
+    box-shadow:
+        0 14px 30px rgba(190,140,210,.25);
+}
+
+/* --------------------
+   レアリティ
+-------------------- */
+
+.card.rarity-pr {
+    border: 2px solid #f4c65e;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf4,
+            #fff5fb
+        );
+
+    box-shadow:
+        0 7px 22px rgba(240,190,90,.2);
+}
+
+.card.rarity-r {
+    border: 2px solid #efa8d4;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaff,
+            #f9f4ff
+        );
+}
+
+.card.rarity-n {
+    border: 2px solid #cfdcf1;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f5faff
+        );
+}
+
+/* PRのキラキラ */
+
+.card.rarity-pr::before {
+    content: "✦";
+
+    position: absolute;
+
+    top: 4px;
+    left: 7px;
+
+    color: #f2bd3f;
+
+    font-size: 20px;
+
+    animation: sparkleCard 1.7s ease-in-out infinite;
+}
+
+.card.rarity-pr::after {
+    content: "✧";
+
+    position: absolute;
+
+    top: 32px;
+    right: 7px;
+
+    color: #f3c96a;
+
+    font-size: 15px;
+
+    animation: sparkleCard 2s ease-in-out infinite;
+}
+
+@keyframes sparkleCard {
+    0%,100% {
+        opacity: .35;
+        transform: scale(.8) rotate(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(15deg);
+    }
+}
+
+/* --------------------
+   所持バッジ
+-------------------- */
+
+.owned-badge {
+    position: absolute;
+
+    top: 9px;
+    right: 9px;
+
+    z-index: 3;
+
+    padding: 4px 8px;
+
+    border-radius: 999px;
+
+    color: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff8fc7,
+            #b58cff
+        );
+
+    box-shadow:
+        0 3px 8px rgba(210,130,210,.3);
+}
+
+/* --------------------
+   画像
+-------------------- */
+
+.card-image {
+    width: 100%;
+
+    aspect-ratio: 3 / 4;
+
+    object-fit: contain;
+
+    display: block;
+
+    border-radius: 15px;
+
+    background: #faf7fb;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.card-image:hover {
+    transform: scale(1.035);
+
+    box-shadow:
+        0 5px 18px rgba(180,140,200,.18);
+}
+
+.no-image {
+    aspect-ratio: 3 / 4;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf5fb,
+            #f1f7ff
+        );
+
+    color: #b7a5bb;
+
+    font-size: 12px;
+}
+
+/* --------------------
+   カード情報
+-------------------- */
+
+.card-id {
+    margin-top: 9px;
+
+    font-size: 11px;
+
+    color: #b09ab5;
+
+    text-align: center;
+}
+
+.card-name {
+    margin-top: 4px;
+
+    min-height: 35px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #725e79;
+
+    line-height: 1.4;
+}
+
+/* --------------------
+   数量
+-------------------- */
+
+.quantity-area {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 9px;
+}
+
+.quantity-btn {
+    width: 28px;
+    height: 28px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd1e8,
+            #d7c5ff
+        );
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 8px rgba(190,150,210,.2);
+
+    transition: .2s;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.12);
+}
+
+.quantity {
+    min-width: 20px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    color: #806589;
+}
+
+/* --------------------
+   欲しいボタン
+-------------------- */
+
+.wish-btn {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 6px;
+
+    border-radius: 999px;
+
+    border: 1px solid #ead7ed;
+
+    background: white;
+
+    color: #b79abb;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.wish-btn:hover {
+    transform: translateY(-2px);
+}
+
+.wish-btn.wished {
+    color: white;
+
+    border-color: transparent;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff9bc9,
+            #b79aff
+        );
+
+    box-shadow:
+        0 4px 10px rgba(210,140,210,.25);
+}
+
+/* --------------------
+   モーダル
+-------------------- */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(110,80,120,.35);
+
+    z-index: 100;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+
+    width: min(430px, 100%);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #fff7fd
+        );
+
+    border-radius: 28px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 20px 60px rgba(100,70,110,.25);
+
+    border: 2px solid #f0d8ed;
+
+    animation: modalOpen .25s ease;
+}
+
+@keyframes modalOpen {
+    from {
+        opacity: 0;
+        transform: scale(.92) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 10px;
+    right: 13px;
+
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f7e7f5;
+
+    color: #9b7da0;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.modal-title {
+    text-align: center;
+
+    color: #8b6b91;
+
+    margin-bottom: 20px;
+
+    font-size: 20px;
+}
+
+.detail-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px 5px;
+
+    border-bottom: 1px dashed #eadbeb;
+
+    font-size: 13px;
+}
+
+.detail-label {
+    color: #aa8bae;
+    font-weight: bold;
+}
+
+.detail-value {
+    color: #6f5b75;
+    font-weight: bold;
+}
+
+/* --------------------
+   カードなし
+-------------------- */
+
+.empty {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #a991ad;
+
+    background: rgba(255,255,255,.7);
+
+    border-radius: 25px;
+
+    border: 1px dashed #dfcce4;
+}
+
+/* --------------------
+   スマホ
+-------------------- */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 18px 10px 40px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    #card-list {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .card {
+        border-radius: 17px;
+        padding: 7px;
+    }
+
+    .card-name {
+        font-size: 11px;
+    }
+
+    .filter-area {
+        padding: 13px;
+        border-radius: 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sparkle sparkle1">✦</div>
+<div class="sparkle sparkle2">✧</div>
+<div class="sparkle sparkle3">♡</div>
+<div class="sparkle sparkle4">✦</div>
+
+<div class="container">
+
+    <div class="logo-area">
+        <img src="images/logo_encore.webp" alt="アイカツ！アンコール">
+
+        <div class="subtitle">
+            ✨ My Card Collection ✨
+        </div>
+    </div>
+
+    <div id="collection-count" class="collection-count">
+        所持カード：0 / 0 枚
+    </div>
+
+    <div class="filter-area">
+
+        <div class="filter-group">
+            <div class="filter-title">💗 状態</div>
+            <div id="status-filter" class="filter-buttons"></div>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">🎀 タイプ</div>
+            <div id="type-filter" class="filter-buttons"></div>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">👗 カテゴリ</div>
+            <div id="category-filter" class="filter-buttons"></div>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">💎 ブランド</div>
+            <div id="brand-filter" class="filter-buttons"></div>
+        </div>
+
+        <div class="filter-group">
+            <div class="filter-title">✨ レアリティ</div>
+            <div id="rarity-filter" class="filter-buttons"></div>
+        </div>
+
+    </div>
+
+    <div id="card-list"></div>
+
+</div>
+
+
+<!-- 詳細モーダル -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <button id="modal-close" class="modal-close">
+            ×
+        </button>
+
+        <div id="modal-title" class="modal-title"></div>
+
+        <div id="modal-details"></div>
+
+    </div>
+
+</div>
+
+
+<script src="cards.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
