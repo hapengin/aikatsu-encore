@@ -241,6 +241,33 @@ const cards = [
     brand: ""
   },
 
+  {
+    id: "E1-30",
+    name: "オデットスワン",
+    type: "キュート",
+    category: "フルコーデ",
+    rarity: "ER",
+    brand: "Dreamy Crown"
+},
+
+{
+    id: "E1-31",
+    name: "リリィリボンストーリー",
+    type: "キュート",
+    category: "フルコーデ",
+    rarity: "ER",
+    brand: "Maple Ribbon"
+},
+
+{
+    id: "E1-32",
+    name: "オーロラペガサス",
+    type: "キュート",
+    category: "フルコーデ",
+    rarity: "ER",
+    brand: ""
+},
+
   // =========================
   // クール
   // =========================
@@ -381,6 +408,15 @@ const cards = [
     rarity: "N",
     brand: ""
   },
+
+  {
+    id: "E1-50",
+    name: "ドリームエミネンス",
+    type: "クール",
+    category: "フルコーデ",
+    rarity: "ER",
+    brand: ""
+},
 
   // =========================
   // セクシー
